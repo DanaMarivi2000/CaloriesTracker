@@ -8,11 +8,14 @@ type FormProps={
 
 
 const Form = ({dispatch}:FormProps) => {
-    const [activity, setActivity]=useState<Activity>({
+    
+    const initialState={
         category:1,
         name:'',
         calories:0
-    })
+    }
+    
+    const [activity, setActivity]=useState<Activity>(initialState)
    
 
     const handleSubmit=(e:ChangeEvent<HTMLSelectElement>|ChangeEvent<HTMLInputElement>)=>{
@@ -29,6 +32,8 @@ const Form = ({dispatch}:FormProps) => {
     const onSubmit=(e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         dispatch({type:'save-activity', payload:{newActivity:activity}})
+
+        setActivity(initialState)
     }
     return (
       <form className="space-y-5 bg-white shadow p-10 rounded-lg"

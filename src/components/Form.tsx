@@ -39,7 +39,7 @@ const Form = () => {
         <input id="calories" type="number" className="border border-slate-300 p-2 rounded-lg" placeholder="Ej. 300 o 500" value={activity.calories} onChange={handleSubmit}/>
     </div>
 
-    <input type="submit" className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer disabled:opacity-10" value='Guardar comida o guardar ejercicio' disabled={!isValidActivity()}/>
+    <input type="submit" className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer disabled:opacity-10" value={activity.category===1?'Guardar Comida':'Guardar Ejercicio'} disabled={!isValidActivity()}/>
        </form>
   )
 }

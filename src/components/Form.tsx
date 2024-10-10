@@ -1,10 +1,13 @@
 import { categories } from "../data/db"
-import { ChangeEvent, FormEvent, useState } from "react"
+import { ChangeEvent, Dispatch, FormEvent, useState } from "react"
 import { Activity } from "../types/indx"
+import { ActivityActions } from "../reducers/activity-reducer"
+type FormProps={
+    dispatch:Dispatch<ActivityActions>
+}
 
 
-
-const Form = () => {
+const Form = ({dispatch}:FormProps) => {
     const [activity, setActivity]=useState<Activity>({
         category:1,
         name:'',
@@ -16,6 +19,7 @@ const Form = () => {
     const isNumberField=['category','categories'].includes(e.target.id) 
         setActivity({...activity,[e.target.id]: isNumberField?Number(e.target.value):e.target.value})
     }
+    
 
     const isValidActivity=()=>{
         const {name, calories}=activity
@@ -24,6 +28,7 @@ const Form = () => {
 
     const onSubmit=(e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
+        dispatch({type:'save-activity', payload:{newActivity:activity}})
     }
     return (
       <form className="space-y-5 bg-white shadow p-10 rounded-lg"

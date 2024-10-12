@@ -1,16 +1,28 @@
 import { categories } from "../data/db"
-import { ChangeEvent, Dispatch, FormEvent, useState } from "react"
+import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from "react"
 import { Activity } from "../types/indx"
 import { ActivityActions } from "../reducers/activity-reducer"
 import {v4 as uuidv4} from 'uuid'
+import { ActivityState } from "../reducers/activity-reducer"
 
 type FormProps={
     dispatch:Dispatch<ActivityActions>
+    state:ActivityState
 }
 
 
-const Form = ({dispatch}:FormProps) => {
+const Form = ({dispatch,state}:FormProps) => {
     
+    useEffect(()=>{
+        if(state.activeId){
+            const selectedActivity=state.activities.filter(stateActivity=>stateActivity.id===state.activeId)[0]
+                setActivity(selectedActivity)
+            
+        }
+    })
+
+
+
     const initialState:Activity={
         id:uuidv4(),
         category:1,
